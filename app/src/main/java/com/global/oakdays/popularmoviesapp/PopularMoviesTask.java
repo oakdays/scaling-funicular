@@ -14,17 +14,9 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
-class PopularMoviesTask extends AsyncTask<Void, Void, String> {
+class PopularMoviesTask extends AsyncTask<String, Void, String> {
 
     private final String LOG_TAG = PopularMoviesTask.class.getSimpleName();
-
-    private final String API_KEY = "8261aa6907a3658fa06461960d5bd175";
-    private final String LANGUAGE = "en-US";
-
-    private final String BASE_URL = "https://api.themoviedb.org/3/movie/" + MainActivity.FILTER + "?";
-
-    private final String API_KEY_PARAM = "api_key";
-    private final String LANGUAGE_PARAM = "language";
 
     private MovieAdapter mAdapter;
 
@@ -33,9 +25,16 @@ class PopularMoviesTask extends AsyncTask<Void, Void, String> {
     }
 
     @Override
-    protected String doInBackground (Void... voids) {
+    protected String doInBackground (String... params) {
 
         mAdapter.movies.clear();
+
+        String BASE_URL = "https://api.themoviedb.org/3/movie/" + params[0] + "?";
+        String API_KEY_PARAM = "api_key";
+        String LANGUAGE_PARAM = "language";
+
+        String API_KEY = "8261aa6907a3658fa06461960d5bd175";
+        String LANGUAGE = "en-US";
 
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
                 .appendQueryParameter(API_KEY_PARAM, API_KEY)
