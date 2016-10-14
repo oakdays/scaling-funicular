@@ -1,8 +1,7 @@
 package com.global.oakdays.popularmoviesapp;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -28,7 +27,7 @@ public class MovieActivity extends AppCompatActivity {
         TextView tvOverview = (TextView) findViewById(R.id.movie_overview);
         TextView tvRating = (TextView) findViewById(R.id.movie_vote_count);
 
-        Movie thisMovie = (Movie) getIntent().getSerializableExtra("movie");
+        Movie thisMovie = getIntent().getExtras().getParcelable("movie");
 
         DateFormat inputFormat = new SimpleDateFormat("yyyy-MM-dd");
         DateFormat outputFormat = new SimpleDateFormat("MM/dd/yyyy");

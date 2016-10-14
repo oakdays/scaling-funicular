@@ -1,15 +1,16 @@
 package com.global.oakdays.popularmoviesapp;
 
-import java.io.Serializable;
+import android.os.Parcel;
+import android.os.Parcelable;
 
-public class Movie implements Serializable {
+class Movie implements Parcelable {
     private String poster;
     private String title;
     private String synopsis;
     private String releaseDate;
     private int voteAverage;
 
-    public Movie (String poster, String title, String synopsis, String releaseDate, int voteAverage) {
+    Movie (String poster, String title, String synopsis, String releaseDate, int voteAverage) {
         this.poster = poster;
         this.title = title;
         this.synopsis = synopsis;
@@ -17,7 +18,27 @@ public class Movie implements Serializable {
         this.voteAverage = voteAverage;
     }
 
-    public String getPoster () {
+    private Movie (Parcel in) {
+        poster = in.readString();
+        title = in.readString();
+        synopsis = in.readString();
+        releaseDate = in.readString();
+        voteAverage = in.readInt();
+    }
+
+    public static final Creator<Movie> CREATOR = new Creator<Movie>() {
+        @Override
+        public Movie createFromParcel (Parcel in) {
+            return new Movie(in);
+        }
+
+        @Override
+        public Movie[] newArray (int size) {
+            return new Movie[size];
+        }
+    };
+
+    String getPoster () {
         return poster;
     }
 
@@ -25,7 +46,7 @@ public class Movie implements Serializable {
         this.poster = poster;
     }
 
-    public String getTitle () {
+    String getTitle () {
         return title;
     }
 
@@ -33,7 +54,7 @@ public class Movie implements Serializable {
         this.title = title;
     }
 
-    public String getSynopsis () {
+    String getSynopsis () {
         return synopsis;
     }
 
@@ -41,7 +62,7 @@ public class Movie implements Serializable {
         this.synopsis = synopsis;
     }
 
-    public String getReleaseDate () {
+    String getReleaseDate () {
         return releaseDate;
     }
 
@@ -49,11 +70,25 @@ public class Movie implements Serializable {
         this.releaseDate = releaseDate;
     }
 
-    public int getVoteAverage () {
+    int getVoteAverage () {
         return voteAverage;
     }
 
-    public void setVoteAverage (int voteCount) {
+    public void setVoteAverage (int voteAverage) {
         this.voteAverage = voteAverage;
+    }
+
+    @Override
+    public int describeContents () {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel (Parcel parcel, int i) {
+        parcel.writeString(poster);
+        parcel.writeString(title);
+        parcel.writeString(synopsis);
+        parcel.writeString(releaseDate);
+        parcel.writeInt(voteAverage);
     }
 }
