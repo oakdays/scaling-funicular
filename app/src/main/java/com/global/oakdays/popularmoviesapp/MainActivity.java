@@ -45,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         PopularMoviesTask popularMoviesTask = new PopularMoviesTask(movieAdapter);
-        popularMoviesTask.execute();
+        popularMoviesTask.execute(FILTER);
 
         return super.onOptionsItemSelected(item);
     }
