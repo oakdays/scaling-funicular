@@ -33,7 +33,7 @@ class PopularMoviesTask extends AsyncTask<String, Void, String> {
         String API_KEY_PARAM = "api_key";
         String LANGUAGE_PARAM = "language";
 
-        String API_KEY = "8261aa6907a3658fa06461960d5bd175";
+        String API_KEY = "";
         String LANGUAGE = "en-US";
 
         Uri builtUri = Uri.parse(BASE_URL).buildUpon()
